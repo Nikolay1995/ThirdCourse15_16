@@ -3,15 +3,42 @@
     <head>
         <title>Queue in JS</title>
         <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="../style.css">
+        <script src="../jquery-2.1.4.min.js"></script>
+        <script src="queue.js"></script>
+        <script src="queueViewer.js"></script>
+        <script type="text/javascript">
+            var div = document.createElement('div');
+            div.className = "queueElement";
+            div.innerHTML = 1;
+            
+            var addToQueue = function () {
+                var insertDiv = div.cloneNode(true); 
+                insertDiv.innerHTML = document.getElementById("addInput").value; 
+                var queueParent = document.getElementById("queueParent"); 
+                add( queueView, queueParent.appendChild(insertDiv)); 
+            };
+            
+            var removeFromQueue = function () {
+                if (isEmpty(queueView)) {
+                    console.log("Queue is empty");
+                    return null;  
+                } else {
+                    var queueParent = document.getElementById("queueParent"); 
+                    queueParent.removeChild(queueView[0]);
+                    return remove(queueView);
+                }
+            };
+        </script>
     </head>
     <body>
         <form>
-
-            <input type="button" value="Add (add(q, x))">
-            <input type="button" value="Remove (remove(q))">
+            <input type="text" id="addInput"><br>
+            <input type="button" value="Add (add(q, x))" onclick="addToQueue();"><br>
+            <input type="button" value="Remove (remove(q))" onclick="removeFromQueue();">
         
         </form>
-        <article>
+        <article id="queueParent">
         
         
         </article>
