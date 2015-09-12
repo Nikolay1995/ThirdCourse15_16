@@ -1,23 +1,17 @@
-function Queue(){
-    var queue = [];
-    
-    //---add(q,x)---
-    this.add = function(x) {
-        queue[queue.length] = x;
+var queue = [];
+
+var add = function( q, x) {
+    q[q.length] = x;
+}
+
+var remove = function(q) {
+    return q.splice(0,1);
+}
+
+var isEmpty = function(q) {
+    if (q.length == 0) {
+        return true;    
+    } else {
+        return false;
     }
-    
-    //---remove(q)---
-    this.remove = function() {
-        queue.splice(0,1);
-    }
-    
-    //---isEmpty(q)---
-    this.isEmpty = function() {
-        if (queue.length > 0) {
-            return true;
-        } else {
-            return false;    
-        }
-    }
-    
 }

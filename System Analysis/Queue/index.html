@@ -6,38 +6,109 @@
         <link rel="stylesheet" type="text/css" href="../style.css">
         <script src="../jquery-2.1.4.min.js"></script>
         <script src="queue.js"></script>
-        <script src="queueViewer.js"></script>
         <script type="text/javascript">
             var div = document.createElement('div');
             div.className = "queueElement";
             div.innerHTML = 1;
+            var counter = 0;
+            
+            var showQueue = function () {
+                
+                var queueParent = document.getElementById("queueParent"); 
+                while (queueParent.firstChild) {
+                    queueParent.removeChild(queueParent.firstChild);
+                }
+                for (var i = 0; i < queue.length; i++) {
+                    var insertDiv = div.cloneNode(true);
+                    insertDiv.innerHTML = queue[i];
+                    queueParent.appendChild(insertDiv);
+                }    
+            };
             
             var addToQueue = function () {
-                var insertDiv = div.cloneNode(true); 
-                insertDiv.innerHTML = document.getElementById("addInput").value; 
-                var queueParent = document.getElementById("queueParent"); 
-                add( queueView, queueParent.appendChild(insertDiv)); 
+                var amount = 1;
+                if (document.getElementById("addInput").value > 0) {
+                    amount = document.getElementById("addInput").value;
+                }
+                for (var i = 0; i < amount; i++) {
+                    add( queue, counter); 
+                    counter++;  
+                }
+                showQueue();
             };
             
             var removeFromQueue = function () {
-                if (isEmpty(queueView)) {
+                if (isEmpty(queue)) {
                     console.log("Queue is empty");
                     return null;  
                 } else {
-                    var queueParent = document.getElementById("queueParent"); 
-                    queueParent.removeChild(queueView[0]);
-                    return remove(queueView);
+                    var deleted = remove(queue);
+                    showQueue();
+                    return deleted;
+                    
                 }
+            };
+            
+            var addNAfterL = function( n, l) {
+                if (l === (queue.length-1)) {  
+                    for (var i = 0; i < n; i++) {
+                        add( queue, queueParent.appendChild(insertDiv)); 
+                        counter++;  
+                    }
+                } else {
+                    var queue1 = [];
+                    for (var i = 0; i < l; i++) {
+                        add(queue1, remove(queue));    
+                    }
+                    for (var i = 0; i < n; i++) {
+                        add(queue1, counter);
+                        counter++;
+                    }
+                    while(queue.length > 0) {
+                        add(queue1, remove(queue));    
+                    }
+                    queue = queue1;
+                }
+                showQueue();
+            };
+            
+            var removeNAfterL = function( n, l) {
+                if(!isEmpty(queue) && l < queue.length) {
+                    var queue1 = [];
+                        for (var i = 0; i < l; i++) {
+                            add(queue1, remove(queue));    
+                        }
+                        for (var i = 0; i < n; i++) {
+                            remove(queue);    
+                        }
+                        if (!isEmpty(queue)) {
+                            while(queue.length > 0) {
+                                add(queue1, remove(queue));    
+                            }
+                        }
+                    queue = queue1;
+                } else {
+                    return false;    
+                }
+                showQueue();
             };
         </script>
     </head>
     <body>
-        <form>
-            <input type="text" id="addInput"><br>
-            <input type="button" value="Add (add(q, x))" onclick="addToQueue();"><br>
-            <input type="button" value="Remove (remove(q))" onclick="removeFromQueue();">
-        
-        </form>
+        <div class="formContainer">
+            <form>
+                <input type="text" id="addInput" placeholder="Add 'n' element to queqe"><br>
+                <input type="button" value="Add (add(q, x))" onclick="addToQueue();"><br>
+                <input type="button" value="Remove (remove(q))" onclick="removeFromQueue();">
+            </form>
+            <form>
+                <input type="text" id="lInput" placeholder="l">
+                <input type="text" id="nInput" placeholder="n">
+                <br>
+                <input type="button" value="Enqueue n elements after l" onclick="addNAfterL(document.getElementById('nInput').value, document.getElementById('lInput').value);"><br>
+                <input type="button" value="Dequeue n elements after l" onclick="removeNAfterL(document.getElementById('nInput').value, document.getElementById('lInput').value);">
+            </form>
+        </div>
         <article id="queueParent">
         
         
