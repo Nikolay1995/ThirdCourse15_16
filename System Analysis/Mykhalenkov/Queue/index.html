@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Queue in JS</title>
+        <title>Queue | SA</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="../style.css">
+        <link rel="stylesheet" type="text/css" href="../../style.css">
         <script src="../jquery-2.1.4.min.js"></script>
         <script src="queue.js"></script>
         <script type="text/javascript">
@@ -13,7 +13,6 @@
             var counter = 0;
             
             var showQueue = function () {
-                
                 var queueParent = document.getElementById("queueParent"); 
                 while (queueParent.firstChild) {
                     queueParent.removeChild(queueParent.firstChild);
@@ -103,10 +102,10 @@
             </form>
             <form>
                 <input type="text" id="lInput" placeholder="l">
-                <input type="text" id="nInput" placeholder="n">
+                <input type="text" id="nInput" placeholder="k">
                 <br>
-                <input type="button" value="Enqueue n elements after l" onclick="addNAfterL(document.getElementById('nInput').value, document.getElementById('lInput').value);"><br>
-                <input type="button" value="Dequeue n elements after l" onclick="removeNAfterL(document.getElementById('nInput').value, document.getElementById('lInput').value);">
+                <input type="button" value="Enqueue k elements after l" onclick="addNAfterL(document.getElementById('nInput').value, document.getElementById('lInput').value);"><br>
+                <input type="button" value="Dequeue k elements after l" onclick="removeNAfterL(document.getElementById('nInput').value, document.getElementById('lInput').value);">
             </form>
         </div>
         <article id="queueParent">

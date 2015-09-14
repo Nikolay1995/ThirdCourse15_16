@@ -2,29 +2,27 @@
 
 body {
     font-family: Verdana;
-    
 }
 
 form {
     border: 1px solid black;
     margin: 10px;
-    width: 300px;
     padding: 20px;
     float: left;
 }
 form input[type=text] {
     height: 20px; 
-    width: 100%;
     line-height: 20px;
     padding: 0 10px;
     margin: 10px 0;
 }
 form input[type=button] {
     height: 30px;
-    width: 100%;
+    width: 30px;
     background-color: aquamarine;
     border: none;
-    margin: 10px 0;
+    margin: 5px 0;
+    border-radius: 50%;
 }
 .formContainer {
     width: 100%;

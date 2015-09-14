@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Stack | SA</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="../../style.css">
+        <script src="../jquery-2.1.4.min.js"></script>
+        <script src="stack.js"></script>
+        <script type="text/javascript">
+            var div = document.createElement('div');
+            div.className = "queueElement";
+            div.innerHTML = 1;
+            var counter = 0;
+            
+            var showQueue = function () {
+                var queueParent = document.getElementById("queueParent"); 
+                while (queueParent.firstChild) {
+                    queueParent.removeChild(queueParent.firstChild);
+                }
+                for (var i = 0; i < queue.length; i++) {
+                    var insertDiv = div.cloneNode(true);
+                    insertDiv.innerHTML = queue[i];
+                    queueParent.appendChild(insertDiv);
+                }    
+            };         
+        </script>
+    </head>
+    <body>
+        <div class="formContainer">
+            <form>
+                <label>X = </label><input type="text" id="X" placeholder="X"><br>
+                <label>Y = </label><input type="text" id="Y" placeholder="Y"><br>
+                <label>Z = </label><input type="text" id="Z" placeholder="Z"><br>
+            </form>
+            <form>
+                <label>l = </label><input type="text" id="lInput" placeholder="l" size="5"><br>
+                <label>k = </label><input type="text" id="kInput" placeholder="k" size="5"><br>
+                <input type="button" value="+" onclick="">
+                <input type="button" value="-" onclick="">
+            </form>
+        </div>
+        <article id="queueParent">
+        
+        
+        </article>
+    </body>
+</html>
