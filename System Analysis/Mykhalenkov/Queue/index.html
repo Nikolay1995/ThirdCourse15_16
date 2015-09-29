@@ -1,141 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="DataStructureQueue">
     <head>
         <title>Queue | SA</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="../../../Libraries/bootstrap-3.3.5-dist/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="../../../Libraries/angular.js"></script>
         <script src="../../../Libraries/jquery-2.1.4.min.js"></script>
-        <script src="queue.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                var $xParent = $('.xParent');
-                var $yParent = $('.yParent');
-                var $zParent = $('.zParent');
-                var X = [];
-                var Y = [];
-                var Z = [];
-                
-                var refreshX = function (array) {
-                    $xParent.empty();
-                    $.each( array, function( key, value ) {
-                        $xParent.append("<div class='item'>"+value+"</div>");
-                    });
-                };
-                
-                var refreshY = function (array) {
-                    $yParent.empty();
-                    $.each( array, function( key, value ) {
-                        $yParent.append("<div class='item'>"+value+"</div>");
-                    });
-                };
-                
-                var refreshZ = function (array) {
-                    $zParent.empty();
-                    $.each( array, function( key, value ) {
-                        $zParent.append("<div class='item'>"+value+"</div>");
-                    });
-                };
-                
-
-                var addToX = function (string) {
-                    var re = /\s*,\s*/;
-                    X = string.split(re);
-                };
-
-                var addToY = function (string) {
-                    var re = /\s*,\s*/;
-                    Y = string.split(re);
-                };
-                
-                var addToZ = function (string) {
-                    var re = /\s*,\s*/;
-                    Z = string.split(re);
-                };
-            
-            //---Interfaces---
-            
-                $('#addbtnX').click(function(){
-                    addToX($('#xInput').val());  
-                    console.log(X);
-                    refreshX(X);
-                });
-                
-                $('#addbtnY').click(function(){
-                    addToY($('#yInput').val());  
-                    console.log(Y);
-                    refreshY(Y);
-                });
-                
-                $('#addbtn').click(function(){
-                    Z = [];
-                    var l = $('#lInput').val();
-                    if(!isEmpty(l)) {
-                        if ($.isNumeric(l)) {
-                            if (l <= X.length) {
-                                l--;
-                                for (var i = 0; i <= l; i++) {
-                                    Z.push(X[i]);    
-                                }
-                                for (var i = 0; i < Y.length; i++) {
-                                    Z.push(Y[i]);    
-                                }
-                                for (var i = l + 1; i < X.length; i++) {
-                                    Z.push(X[i]);    
-                                }     
-                            } else {
-                                console.error("l > X.length");     
-                            }
-                        } else {
-                            console.error("l is NaN \n l: "+l);    
-                        }
-                    } else {
-                        console.error("l is empty");    
-                    }                    
-                    refreshZ(Z);
-                });
-                
-            });
-        </script>
+        <script src="script.js"></script>
     </head>
-    <body>
-        <h1>Queue</h1>
+    <body ng-controller="DefaultCtrl">
+        <h1 class="text-center">Queue</h1>
         <div class="container">
-            <div class="col-lg-5">
-                <form>
+            <div class="col-lg-1">
+            <form>
                     <div class="form-group">
-                        <input type="text" id="xInput" placeholder="X" class="form-control">
+                        <input type="text" ng-model="nValue" placeholder="n" class="form-control">
                     </div>
                     <div class="form-group">
-                        <input type="text" id="yInput" placeholder="Y" class="form-control">
+                        <input type="text" ng-model="kValue" placeholder="k" class="form-control">
                     </div>
                     <div class="form-group">
-                        <input type="text" id="lInput" placeholder="l" class="form-control">
+                        <input type="text" ng-model="lValue" placeholder="l" class="form-control">
                     </div>
                 </form>
             </div>
-            <div class="col-lg-2">
-                <button type="button" class="btn btn-primary" id="addbtnX">Set X</button><br><br>
-                <button type="button" class="btn btn-warning" id="addbtnY">Set Y</button>
+            <div class="col-lg-3">
+                <button type="button" class="btn btn-primary" ng-click="setX()">Set X to {{nValue}} items</button><br><br>
+                <button type="button" class="btn btn-primary" ng-click="setY()">Set Y to {{kValue}} items</button><br><br>
+                <p>Caution: First element has index 1.</p>
             </div>
-            <div class="col-lg-5">
-                <button type="button" class="btn btn-success" id="addbtn">Add Y to X after l</button><br><br>
-                <button type="button" class="btn btn-danger">Remove Y-elements after l</button><br><br>
-                <p>Do not forget that first element has index 0</p>
+            <div class="col-lg-8">
+                <button type="button" class="btn btn-success" ng-click="Add()">Add {{Y.length}} elements to X after {{lValue}}</button><br><br>
+                <button type="button" class="btn btn-danger" ng-click="Delete()">Remove {{Y.length}} elements from X after {{lValue}}</button><br><br>
             </div>
         </div>
         <h2>X</h2>
-        <div class="xParent queueParent">
-            
+        <div class="queueParent">
+            <form class="form-inline">
+                <input type="text" ng-repeat="item in X" ng-model="X[$index]" class="form-control" size="5"></input>
+            </form>  
         </div>
         <h2>Y</h2>
-        <div class="yParent queueParent">
-            
+        <div class="queueParent">
+            <form class="form-inline">
+                <input type="text" ng-repeat="item in Y" ng-model="Y[$index]" class="form-control" size="5"></input>
+            </form>  
         </div>
         <h2>Z</h2>
-        <div class="zParent queueParent">
-            
+        <div class="queueParent">
+            <form class="form-inline">
+                <input type="text" ng-repeat="item in Z track by $index" class="form-control" ng-model="Z[$index]" ng-readonly></input>
+            </form>  
+        </div>
         </div>
     </body>
 </html>
