@@ -1,47 +1,93 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="DataStructureStack">
     <head>
         <title>Stack | SA</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="../../style.css">
-        <script src="../jquery-2.1.4.min.js"></script>
-        <script src="stack.js"></script>
-        <script type="text/javascript">
-            var div = document.createElement('div');
-            div.className = "queueElement";
-            div.innerHTML = 1;
-            var counter = 0;
-            
-            var showQueue = function () {
-                var queueParent = document.getElementById("queueParent"); 
-                while (queueParent.firstChild) {
-                    queueParent.removeChild(queueParent.firstChild);
-                }
-                for (var i = 0; i < queue.length; i++) {
-                    var insertDiv = div.cloneNode(true);
-                    insertDiv.innerHTML = queue[i];
-                    queueParent.appendChild(insertDiv);
-                }    
-            };         
-        </script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="../../../Libraries/bootstrap-3.3.5-dist/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="../../../Libraries/angular.js"></script>
+        <script src="../../../Libraries/jquery-2.1.4.min.js"></script>
+        <script src="script.js"></script>
     </head>
-    <body>
-        <div class="formContainer">
+    <body ng-controller="DefaultCtrl">
+        <h1 class="text-center">Stack</h1>
+        <div class="container">
+            <div class="col-lg-1">
             <form>
-                <label>X = </label><input type="text" id="X" placeholder="X"><br>
-                <label>Y = </label><input type="text" id="Y" placeholder="Y"><br>
-                <label>Z = </label><input type="text" id="Z" placeholder="Z"><br>
-            </form>
-            <form>
-                <label>l = </label><input type="text" id="lInput" placeholder="l" size="5"><br>
-                <label>k = </label><input type="text" id="kInput" placeholder="k" size="5"><br>
-                <input type="button" value="+" onclick="">
-                <input type="button" value="-" onclick="">
+                    <div class="form-group">
+                        <input type="text" ng-model="nValue" placeholder="n" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" ng-model="kValue" placeholder="k" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" ng-model="lValue" placeholder="l" class="form-control">
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-2">
+                <button type="button" class="btn btn-primary" ng-click="setX()">Set X to {{nValue}} items</button><br><br>
+                <button type="button" class="btn btn-primary" ng-click="setY()">Set Y to {{kValue}} items</button><br><br>
+                <p>Caution: First element has index 1.</p>
+            </div>
+            <div class="col-lg-3">
+                <button type="button" class="btn btn-success" ng-click="Add()">Add {{Y.length}} elements to X after {{lValue}}</button><br><br>
+                <button type="button" class="btn btn-danger" ng-click="Delete()">Remove {{Y.length}} elements from X after {{lValue}}</button><br><br>
+                <button type="button" class="btn btn-warning" ng-click="showArrays()">Show stacks in dev.console</button>
+            </div>
+            <div class="col-lg-2">
+                <form>
+                    <h3>Read X from</h3>
+                    <input type="radio" checked value="Xleftside" ng-model="Xside" >Left</input><br>
+                    <input type="radio" value="Xrightside" ng-model="Xside">Right</input>
+                </form>
+            </div>
+            <div class="col-lg-2">
+                <form>
+                    <h3>Read Y from</h3>
+                    <input type="radio" value="Yleftside" ng-model="Yside">Left</input><br>
+                    <input type="radio" value="Yrightside" ng-model="Yside">Right</input>
+                </form>
+            </div>
+            <div class="col-lg-2">
+                <form>
+                    <h3>Write Z from</h3>
+                    <input type="radio" value="Zleftside" ng-model="Zside">Left</input><br>
+                    <input type="radio" value="Zrightside" ng-model="Zside" ng-change="showSides()">Right</input>
+                </form>
+            </div>
+        </div>
+
+        <!-- Result -->
+    
+        <div class="col-lg-1"></div>
+        <div class="col-lg-2">
+            <h2 class="text-center">X</h2>
+            <form class="form-inline" >
+                <div class="input-group" ng-repeat="item in X">
+                    <div class="input-group-addon">{{X.length - 1 - $index}}</div>
+                    <input type="text" ng-model="X[$index]" class="form-control" size="3"></input>
+                </div>
             </form>
         </div>
-        <article id="queueParent">
-        
-        
-        </article>
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2">
+            <h2 class="text-center">Y</h2>
+            <form class="form-inline" >
+                <div class="input-group" ng-repeat="item in Y">
+                    <div class="input-group-addon">{{Y.length - 1 - $index}}</div>
+                    <input type="text" ng-model="Y[$index]" class="form-control" size="3"></input>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2">
+            <h2 class="text-center">Z</h2>
+            <form class="form">
+                <input type="text" ng-repeat="item in Z" ng-model="Z[$index]" class="form-control" size="3" ng-readonly></input>
+            </form>
+        </div>
+        <div class="col-lg-1"></div>
     </body>
 </html>
