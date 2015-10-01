@@ -237,7 +237,7 @@ $(document).on("click", "#minus", function(){
 	
 	if (($("#rex").prop("checked"))) {
 		if ($("#rs").prop("checked")) {
-			for (var i=0; i<k; i++) {
+			for (var i=0; i<l; i++) {
 				z[i] = x[i];
 			}
 			for (var i=l+k; i<n; i++) {
@@ -247,7 +247,7 @@ $(document).on("click", "#minus", function(){
 			//okay
 		}
 		else if ($("#ls").prop("checked")) {
-			for (var i=0; i<k; i++) {
+			for (var i=0; i<l; i++) {
 				z[i] = x[i];
 			}
 			for (var i=l+k; i<n; i++) {
@@ -260,7 +260,7 @@ $(document).on("click", "#minus", function(){
 	}
 	else if ($("#lex").prop("checked")) {
 		if ($("#rs").prop("checked")) {
-			for (var i=0; i<k; i++) {
+			for (var i=0; i<l; i++) {
 				z[i] = x[i];
 			}
 			for (var i=l+k; i<n; i++) {
@@ -271,7 +271,7 @@ $(document).on("click", "#minus", function(){
 			//okay
 		}
 		else if ($("#ls").prop("checked")) {
-			for (var i=0; i<k; i++) {
+			for (var i=0; i<l; i++) {
 				z[i] = x[i];
 			}
 			for (var i=l+k; i<n; i++) {
