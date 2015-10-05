@@ -6,29 +6,54 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="../../../Libraries/bootstrap-3.3.5-dist/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="../../../Libraries/vis/dist/vis.min.css">
         <script type="text/javascript" src="../../../Libraries/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="../../../Libraries/angular.js"></script>
-        <script type="text/javascript" src="../../../Libraries/dracula/js/raphael-min.js"></script>
-        <script type="text/javascript" src="../../../Libraries/dracula/js/dracula_graffle.js"></script>
-        <script type="text/javascript" src="../../../Libraries/dracula/js/dracula_graph.js"></script>
-        <script src="script.js"></script>
+        <script type="text/javascript" src="../../../Libraries/vis/dist/vis.min.js"></script>
+        
     </head>
     <body ng-controller="DefaultCtrl">
-        <h1 class="text-center">Graph</h1>
         <div class="container">
-            <div class="table-responsive">
+            <h1 class="text-center">Graph</h1>
+            <!-- MATRIX -->
+            <div class="col-lg-6">
+                <div class="table-responsive">
                 <table class="table table-bordered table-condensed">
-                    <thead>
-                        <th ng-repeat="item in matrix track by $index">{{$index}}</th>
+                    <thead >
+                        <th class="active" >i\j</th>
+                        <th class="active" ng-repeat="item in matrix track by $index">{{$index + 1}}</th>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="array in matrix track by $index">
+                        <tr ng-repeat="array in matrix track by $index" >
+                            <td class="active"><b>{{$index +1 }}</b></td>
                             <td ng-repeat="item in array track by $index">{{item}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+            </div>
+            
+            <!-- BUTTONS -->
+            <div class="col-lg-3">
+                <button type="button" class="btn btn-primary">Add node</button><br><br>
+                <button type="button" class="btn btn-primary">Add node with corresponded edges</button>
+            </div>
+            <div class="col-lg-3">
+                <button type="button" class="btn btn-warning">Delete edge</button><br><br>
+                <button type="button" class="btn btn-warning">Delete node and edges </button><br><br>
+                <button type="button" class="btn btn-warning">Delete node but save connections </button>
+            </div>
+            
+            
+            
+            <!-- GRAPH -->
+            <div class="col-lg-12">
+                <div id="myMatrix"></div>
+            </div>
+            
         </div>
-        <div id="canvas"></div>
+        
+        
+        <script src="script.js"></script>
     </body>
 </html>
