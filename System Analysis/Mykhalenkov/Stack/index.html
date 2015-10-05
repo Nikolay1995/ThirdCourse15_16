@@ -29,7 +29,7 @@
             <div class="col-lg-2">
                 <button type="button" class="btn btn-primary" ng-click="setX()">Set X to {{nValue}} items</button><br><br>
                 <button type="button" class="btn btn-primary" ng-click="setY()">Set Y to {{kValue}} items</button><br><br>
-                <p>Caution: First element has index 1.</p>
+                <p>Caution: First element has index 0.</p>
             </div>
             <div class="col-lg-3">
                 <button type="button" class="btn btn-success" ng-click="Add()">Add {{Y.length}} elements to X after {{lValue}}</button><br><br>
@@ -39,8 +39,8 @@
             <div class="col-lg-2">
                 <form>
                     <h3>Read X from</h3>
-                    <input type="radio" checked value="Xleftside" ng-model="Xside" >Left</input><br>
-                    <input type="radio" value="Xrightside" ng-model="Xside">Right</input>
+                    <input type="radio" checked value="Xleftside" ng-model="Xside" ng-change="changeXside()">Left</input><br>
+                    <input type="radio" value="Xrightside" ng-model="Xside" ng-change="changeXside()">Right</input>
                 </form>
             </div>
             <div class="col-lg-2">
@@ -84,8 +84,11 @@
         <div class="col-lg-2"></div>
         <div class="col-lg-2">
             <h2 class="text-center">Z</h2>
-            <form class="form">
-                <input type="text" ng-repeat="item in Z" ng-model="Z[$index]" class="form-control" size="3" ng-readonly></input>
+            <form class="form-inline">
+                <div class="input-group" ng-repeat="item in Z track by $index">
+                    <div class="input-group-addon">{{Z.length - 1 - $index}}</div>
+                    <input type="text" ng-model="Z[$index]" class="form-control" size="3" ng-readonly></input>
+                </div>
             </form>
         </div>
         <div class="col-lg-1"></div>

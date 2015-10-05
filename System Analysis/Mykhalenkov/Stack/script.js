@@ -17,16 +17,28 @@ angular.module('DataStructureStack', [])
     
     $scope.setX = function () {
         $scope.X = [];
-        for (var i = 0; i < $scope.nValue; i++) {
-            $scope.X[i] = i;    
-        }
+        if ($scope.Xside === "Xleftside") {
+            for (var i = 0; i < $scope.nValue; i++) {
+                $scope.X[i] = $scope.nValue - i - 1;    
+            }   
+        } else {
+            for (var i = 0; i < $scope.nValue; i++) {
+                $scope.X[i] = i;    
+            } 
+        }  
     };
     
     $scope.setY = function () {
         $scope.Y = [];
-        for (var i = 0; i < $scope.kValue; i++) {
-            $scope.Y[i] = i;    
-        }
+        if ($scope.Yside === "Yleftside") {
+            for (var i = 0; i < $scope.kValue; i++) {
+                $scope.Y[i] = $scope.kValue - i - 1;    
+            }   
+        } else {
+            for (var i = 0; i < $scope.kValue; i++) {
+                $scope.Y[i] = i;    
+            } 
+        } 
     };
     
     $scope.Add = function () {
@@ -43,30 +55,19 @@ angular.module('DataStructureStack', [])
             $scope.Z.push($scope.X[i]);    
             console.log(i);
         }
+        if ($scope.Zside === "Zleftside") {
+            $scope.TempArray = $scope.Z;
+            $scope.Z = [];
+            $scope.Z = $scope.TempArray.reverse();
+
+        }
     };
     
     $scope.Delete = function () {
         $scope.Z = [];
-        if ($scope.lValue < $scope.X.length) {
-            for (var i = 0; i < $scope.lValue; i++) {
-                $scope.Z.push($scope.X[i]);   
-                console.log(i);
-            }
-            if (($scope.lValue + $scope.Y.length) < $scope.X.length) {
-                for (var i = $scope.lValue + $scope.Y.length; i < $scope.X.length; i++) {
-                    $scope.Z.push($scope.X[i]);    
-                    console.log(i);
-                }       
-            }
-        } else {
-            console.log("l > X");  
-            $scope.Z = ["ERROR: nothing to delete."];
-        }
-    }
-})
-.filter('reverse', function() {
-  return function(items) {
-    return items.slice().reverse();
-  };
+    };
+    
+    
 });
+
     
