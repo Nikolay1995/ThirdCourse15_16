@@ -1,0 +1,11 @@
+.form-inline {
+    border-color: #ddd;
+    border-width: 1px;
+    border-radius: 4px;
+    margin: 0 auto;
+}
+.form-inline > input {
+    
+    margin: 5px;
+
+}

@@ -1,0 +1,105 @@
+input {
+	background: linear-gradient(to right, #FFF, #AAA);
+}
+
+body {
+	min-width: 1000px;
+	background: linear-gradient(to right, #FFF, #63DD8D);
+}
+
+#wrapper {
+	width: 95%;
+	margin: 10px auto;
+}
+
+#task {
+	width: 95%;
+	margin: 0 auto;
+	height: 100px;
+	background: linear-gradient(to right, #63DD8D, #007929);
+	padding-top: 5px;
+	border-radius: 5px;
+}
+
+
+#inputX, #inputY, #inputZ {
+	width: 10%;
+	float: left;
+	background-color: #63DD8D;
+	margin-right: 4px;
+	padding-right: 3px;
+	border-radius: 5px;
+
+}
+
+#inputX input, #inputY input, #inputZ input {
+	width: 36px;
+	height: 36px;
+	text-align: center;
+	font-size: 20px;
+	border-radius: 5px;
+}
+
+#X, #Y, #Z{
+	width: 36px;
+	margin: 0 auto;
+	padding-bottom: 10px;
+}
+
+#checkboxs {
+	height: 45px;
+	margin: 5px auto;
+	width: 90%;
+	padding-top: 5px;
+	text-align: enter;
+	border-radius: 5px;
+}
+
+#enterX, #enterY, #result {
+	float: left;
+	width: 280px;
+	background-color: #00BB3F;
+	margin: 0.5px;
+	border-radius: 5px;
+	border: 1px solid #FFF;
+}
+
+#X span, #Y span, #Z span {
+	margin-left: 13px;
+	border-radius: 5px;
+}
+
+#enters {
+	width: 400px;
+	margin: 0 auto;
+	border-radius: 5px;
+}
+
+#enters span {
+	font-size: 20px;
+}
+
+#n, #k, #l {
+	width: 70px;
+	height: 25px;
+	font-size: 20px;
+	border-radius: 5px;
+}
+
+#apply  {
+	width: 70px;
+	height: 31px;
+	border-radius: 5px;
+}
+
+#autoSize {
+	margin: 0 auto;
+	width: 850px;
+}
+
+#plus, #minus {
+	width: 50px;
+	height: 50px;
+	font-size: 20px;
+	border-radius: 50%;
+}

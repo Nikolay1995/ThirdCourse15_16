@@ -1,0 +1,46 @@
+* { padding: 0; margin: 0; box-sizing: border-box;}
+
+body {
+    font-family: Verdana;
+}
+
+form {
+    border: 1px solid black;
+    margin: 10px;
+    padding: 20px;
+    float: left;
+}
+form input[type=text] {
+    height: 20px; 
+    line-height: 20px;
+    padding: 0 10px;
+    margin: 10px 0;
+}
+form input[type=button] {
+    height: 30px;
+    width: 30px;
+    background-color: aquamarine;
+    border: none;
+    margin: 5px 0;
+    border-radius: 50%;
+}
+.formContainer {
+    width: 100%;
+    overflow: auto;
+    height: auto;
+}
+article{
+    padding: 30px;
+    width: 100%;
+}
+.queueElement {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 90px;
+    height: 90px;
+    float: left;
+    word-wrap: break-word;
+    opacity: 1;
+    margin: 5px;
+}

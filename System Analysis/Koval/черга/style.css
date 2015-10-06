@@ -1,0 +1,57 @@
+#n, #k, #l, button {
+	width: 240px;
+	border-radius: 5px;
+	height: 40px;
+	font-size: 30px;
+	margin-right: 10px;
+	background: linear-gradient(to right, #FFF, #AAA);
+}
+
+#result {
+	letter-spacing: 5px;
+	width: 80%;
+	background: linear-gradient(to right, #FFF, #AAA);
+}
+
+#wrapper {
+	background-color: #476DD5;
+	padding: 10px;
+	border-radius: 20px;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+body {
+	background: linear-gradient(to left, #fff, #6D89D5);
+	padding: 10px;
+
+}
+
+span {
+	font-size: 30px;
+}
+
+input {
+	width: 40px;
+	height: 40px;
+	border-radius: 5px;
+	font-size: 30px;
+	background: linear-gradient(to right, #FFF, #AAA);
+}
+
+#add, #remove {
+	width: 100px;
+	height: 100px;
+	border-radius: 100%;
+	outline: none;
+	background: linear-gradient(to right, #FFF, #AAA);
+	font-size: 70px;
+}
+
+h1 {
+	text-align: center;
+}
+
+h2 {
+	margin-left: 40px;
+}
