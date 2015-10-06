@@ -106,7 +106,6 @@ $(document).on("click", "#plus", function(){
 					z[l+k+i] = x[l+i];
 				}
 				show(z);
-				//okay
 			}
 			else if ($("#ls").prop("checked")) {
 				for (var i=0; i<l; i++) {
@@ -120,7 +119,6 @@ $(document).on("click", "#plus", function(){
 				}
 				z.reverse();
 				show(z);
-				//okay
 			}
 		}
 		else if ($("#ley").prop("checked")) {
@@ -136,7 +134,6 @@ $(document).on("click", "#plus", function(){
 					z[l+k+i] = x[l+i];
 				}
 				show(z);
-				//okay
 			}
 			else if ($("#ls").prop("checked")) {
 				y.reverse();
@@ -151,7 +148,6 @@ $(document).on("click", "#plus", function(){
 				}
 				z.reverse();
 				show(z);
-				//okay
 			}
 		}
 	}
@@ -170,7 +166,6 @@ $(document).on("click", "#plus", function(){
 				}
 				z.reverse();
 				show(z);
-				//okay
 			}
 			else if ($("#ls").prop("checked")) {
 				y.reverse();
@@ -184,7 +179,6 @@ $(document).on("click", "#plus", function(){
 					z[l+k+i] = x[l+i];
 				}
 				show(z);
-				//okay
 			}
 		}
 		else if ($("#ley").prop("checked")) {
@@ -200,7 +194,6 @@ $(document).on("click", "#plus", function(){
 				}
 				z.reverse();
 				show(z);
-				//okay
 			}
 			else if ($("#ls").prop("checked")) {
 				for (var i=0; i<l; i++) {
@@ -213,7 +206,6 @@ $(document).on("click", "#plus", function(){
 					z[l+k+i] = x[l+i];
 				}
 				show(z);
-				//okay
 			}
 		}
 	}
@@ -244,7 +236,6 @@ $(document).on("click", "#minus", function(){
 				z[i-k] = x[i];
 			}
 			show(z);
-			//okay
 		}
 		else if ($("#ls").prop("checked")) {
 			for (var i=0; i<l; i++) {
@@ -254,8 +245,7 @@ $(document).on("click", "#minus", function(){
 				z[i-k] = x[i];
 			}
 			z.reverse();
-			show(z);
-			//okay
+			show(z)
 		}
 	}
 	else if ($("#lex").prop("checked")) {
@@ -268,7 +258,6 @@ $(document).on("click", "#minus", function(){
 			}
 			z.reverse();
 			show(z);
-			//okay
 		}
 		else if ($("#ls").prop("checked")) {
 			for (var i=0; i<l; i++) {
@@ -278,7 +267,6 @@ $(document).on("click", "#minus", function(){
 				z[i-k] = x[i];
 			}
 			show(z);
-			//okay
 		}
 	}
 });
