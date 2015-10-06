@@ -42,8 +42,8 @@ angular.module('DataStructureQueue', [])
                 $scope.Z.push($scope.X[i]);   
                 console.log(i);
             }
-            if (($scope.lValue + $scope.Y.length) < $scope.X.length) {
-                for (var i = $scope.lValue + $scope.Y.length; i < $scope.X.length; i++) {
+            if ((parseInt($scope.lValue, 10) + $scope.Y.length) < $scope.X.length) {
+                for (var i = parseInt($scope.lValue, 10) + $scope.Y.length; i < $scope.X.length; i++) {
                     $scope.Z.push($scope.X[i]);    
                     console.log(i);
                 }       
