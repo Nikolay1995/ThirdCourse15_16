@@ -16,35 +16,33 @@
         <div class="container">
             <h1 class="text-center">Graph</h1>
             <!-- MATRIX -->
-            <div class="col-lg-6">
+            <div class="col-lg-8">
                 <div class="table-responsive">
-                <table class="table table-bordered table-condensed">
-                    <thead >
-                        <th class="active" >i\j</th>
-                        <th class="active" ng-repeat="item in matrix track by $index">{{$index + 1}}</th>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="array in matrix track by $index" >
-                            <td class="active"><b>{{$index +1 }}</b></td>
-                            <td ng-repeat="item in array track by $index">{{item}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <table class="matrix">
+                        <thead >
+                            <th class="active" >i\j</th>
+                            <th class="active" ng-repeat="item in matrix track by $index">{{$index + 1}}</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="array in matrix track by $index" >
+                                <td class="active"><b>{{$index + 1}}</b></td>
+                                <td ng-repeat="item in array track by $index">{{item}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             
             <!-- BUTTONS -->
-            <div class="col-lg-3">
-                <button type="button" class="btn btn-primary">Add node</button><br><br>
-                <button type="button" class="btn btn-primary">Add node with corresponded edges</button>
+            <div class="col-lg-1">
+                <button type="button" class="btn btn-primary" ng-click="AddNode()">Add Node</button><br><br>
+                <button type="button" class="btn btn-primary" ng-click="AddEdge()">Add Edge</button>
             </div>
             <div class="col-lg-3">
-                <button type="button" class="btn btn-warning">Delete edge</button><br><br>
-                <button type="button" class="btn btn-warning">Delete node and edges </button><br><br>
+                <button type="button" class="btn btn-warning" ng-click="DeleteEdge()">Delete edge</button><br><br>
+                <button type="button" class="btn btn-warning" ng-click="DeleteNode()">Delete node and edges </button><br><br>
                 <button type="button" class="btn btn-warning">Delete node but save connections </button>
-            </div>
-            
-            
+            </div>    
             
             <!-- GRAPH -->
             <div class="col-lg-12">
@@ -52,7 +50,6 @@
             </div>
             
         </div>
-        
         
         <script src="script.js"></script>
     </body>
