@@ -1,4 +1,3 @@
-//---Module---
 angular.module('DataStructureStack', [])
 .controller('DefaultCtrl', function ($scope) {    
     $scope.X = [];
@@ -45,29 +44,35 @@ angular.module('DataStructureStack', [])
         $scope.Z = [];
         for (var i = 0; i < $scope.lValue; i++) {
             $scope.Z.push($scope.X[i]);   
-            console.log(i);
         }
         for (var i = 0; i < $scope.Y.length; i++) {
             $scope.Z.push($scope.Y[i]);
-            console.log(i);
         }
         for (var i = $scope.lValue; i < $scope.X.length; i++) {
             $scope.Z.push($scope.X[i]);    
-            console.log(i);
         }
         if ($scope.Zside === "Zleftside") {
             $scope.TempArray = $scope.Z;
             $scope.Z = [];
             $scope.Z = $scope.TempArray.reverse();
-
         }
     };
     
     $scope.Delete = function () {
         $scope.Z = [];
+		for (var i = 0; i < $scope.lValue; i++) {
+            $scope.Z.push($scope.X[i]);   
+        }
+		console.log(parseInt($scope.lValue, 10) + $scope.Y.length);
+		for (var i = parseInt($scope.lValue, 10) + $scope.Y.length; i < $scope.X.length; i++) {
+            $scope.Z.push($scope.X[i]);    
+        }
+		if ($scope.Zside === "Zleftside") {
+            $scope.TempArray = $scope.Z;
+            $scope.Z = [];
+            $scope.Z = $scope.TempArray.reverse();
+        }
     };
-    
-    
 });
 
     
