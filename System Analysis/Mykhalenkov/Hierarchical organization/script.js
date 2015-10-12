@@ -9,7 +9,6 @@ var matrix = [  [0,1,1,0,0],
 angular.module('DataStructureGraph', [])
 .controller('DefaultCtrl', function ($scope) {
     $scope.matrix = matrix;
-    $scope.characteristic = "";
     
     $scope.AddNode = function () {
         for (var i = 0; i < $scope.matrix.length; i++) {
@@ -21,7 +20,6 @@ angular.module('DataStructureGraph', [])
         }
         $scope.matrix.push(newRow);
         $scope.Redraw();
-        $scope.Characterize();
     };
     
     $scope.AddEdge = function () {
@@ -31,7 +29,6 @@ angular.module('DataStructureGraph', [])
         to--;
         $scope.matrix[from][to] = 1;
         $scope.Redraw();
-        $scope.Characterize();
     };
     
     $scope.DeleteEdge = function () {
@@ -40,8 +37,7 @@ angular.module('DataStructureGraph', [])
         var to = prompt("to: ");
         to--;
         $scope.matrix[from][to] = 0;
-        $scope.Redraw();   
-        $scope.Characterize();
+        $scope.Redraw();            
     };
     
     $scope.DeleteNode = function () {
@@ -52,7 +48,6 @@ angular.module('DataStructureGraph', [])
             $scope.matrix[i].splice(nodeIndex, 1);
         }
         $scope.Redraw();
-        $scope.Characterize();
     };
     
     $scope.DeleteNodeButSaveConnections = function () {
@@ -61,26 +56,18 @@ angular.module('DataStructureGraph', [])
         var from = [];
         for(var i = 0; i < $scope.matrix.length; i++) {
             if ($scope.matrix[i][nodeIndex] === 1) {
-                if(i > nodeIndex) {
-                    from.push(i - 1);    
-                } else {
-                    from.push(i);    
-                }
+                from.push(i);    
             }
         }
         var to = [];
         for(var i = 0; i < $scope.matrix.length; i++) {
             if ($scope.matrix[nodeIndex][i] === 1) {
-                if (i > nodeIndex) {
-                    to.push(i - 1); 
-                } else {
-                    to.push(i);     
-                }      
+                to.push(i);    
             }
         }
-        console.log("From: " + from + "\nTo: " + to);
+        console.log(from, to);
         for (var i = 0; i < from.length; i++) {
-            for (var j = 0; j < to.length; j++) {
+            for (var j = 0; j < from.length; j++) {
                 $scope.matrix[from[i]][to[j]] = 1;
             }
         }
@@ -90,15 +77,17 @@ angular.module('DataStructureGraph', [])
             $scope.matrix[i].splice(nodeIndex, 1);
         }
         $scope.Redraw();
-        $scope.Characterize();
     }
     
     $scope.Redraw = function () {
+        // create an array with nodes
         var nodes = new vis.DataSet();
         for (var i = 0; i < $scope.matrix.length; i++) {
             nodes.add({id: i, label: (i+1).toString()});
         };
+
         var edgesCount = 0;
+
         for (var i = 0; i < $scope.matrix.length; i++) {
             for (var j = 0; j < $scope.matrix.length; j++) {
                 if($scope.matrix[i][j] === 1) {
@@ -106,7 +95,9 @@ angular.module('DataStructureGraph', [])
                 }
             };
         };
+
         var edges = new vis.DataSet();
+
         for (var i = 0; i < $scope.matrix.length; i++) {
             for (var j = 0; j < $scope.matrix.length; j++) {
                 if($scope.matrix[i][j] === 1) {
@@ -114,37 +105,19 @@ angular.module('DataStructureGraph', [])
                 }
             };
         };
+
+        // create a network
         var container = document.getElementById('myMatrix');
         var data = {
             nodes: nodes,
             edges: edges
         };
-        var options = {
-          "edges": {
-            "smooth": {
-              "forceDirection": "none"
-            }
-          },
-          "physics": {
-            "forceAtlas2Based": {
-              "springLength": 100
-            },
-            "minVelocity": 0.75,
-            "solver": "forceAtlas2Based"
-          }
-        }
+
+        var options = {};
         var network = new vis.Network(container, data, options);        
     }
     
-    $scope.Characterize = function () {
-        $scope.characteristic = "";
-        for(var i = 0; i < $scope.matrix.length; i++) {
-            if ($scope.matrix[i][i] === 1) {
-                $scope.characteristic += "\nNode " + (i + 1).toString() + " have circle.";        
-            }
-        }
-        
-    }
+    
     
     
     $scope.Redraw();
