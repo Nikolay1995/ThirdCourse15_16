@@ -1,16 +1,256 @@
+<!DOCTYPE HTML>
 <html>
 <head>
-    <script type="text/javascript" src="js/raphael-min.js"></script>
-    <script type="text/javascript" src="js/dracula_graffle.js"></script>
-    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-    <script type="text/javascript" src="js/dracula_graph.js"></script>
-    <script type="text/javascript" src="js/dracula_algorithms.js"></script>
-    <script type="text/javascript" src="script.js"></script>
-</head>
-<body>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script src="jquery-2.1.4.min.js"></script>
+	<script src="jquery-ui.js"></script>
+	<script src="vis.js"></script>
+    <title>graph</title>
+	<style>
+		body {
+			background-color: #FFE773;
+		}
+	
+		button, input, #task, #parent, #matrix {
+			border-radius: 5px;
+		}
+	
+		#task {
+			width: 95%;
+			margin: 0 auto;
+			height: 70px;
+			background-color: #BFA730;
+			padding: 5px 0; 
+		}
+		
+		#task button {
+			width: 20%;
+			font-size: 15px;
+			height: 26px;
+			margin-top: 4px;
+		}
+		
+		#task input {
+			width: 10%; 
+			height: 18px;
+		}
+		
+		#matrix {
+			width: 60%;
+			margin: 5px auto;
+			background-color: #BFA730;
+			text-align: center;
+		}
+		
+		#inputs, .marks {
+			width: 30px;
+			height: 30px;
+			text-align: center;
+		}
+		
+		.marks {
+			background-color: #ddd;
+		}
+		
+		#parent {
+			position: relative;
+			width: 1000px;
+			height: 600px;
+			margin: 5px auto;
+			background-color: #BFA730;
+		}
+	</style>
+	<script type='text/javascript'>
+		$(document).ready(function() {
+			var matrix = [];
+		
+			var drawMatrix = function() {
+				$("#matrix").remove();
+				$("body").append("<div id='matrix'></div>");
+				var col = parseInt($('#col').val());
+				$("#matrix").append("<input class='marks' value='i/j'></input>");
+				for (var i=0; i<col; i++) {
+					$("#matrix").append("<input class='marks' value="+(i+1).toString()+"></input>");
+				}
+				$("#matrix").append("<br>");
+				for (var i=0; i<col; i++) {
+					$("#matrix").append("<input class='marks' value="+(i+1).toString()+"></input>");
+					for (var j=0; j<col; j++) {
+						var element = document.createElement('input');
+						element.value = matrix[i][j];
+						element.id = 'inputs';
+						element.className = 'element'+i.toString();
+						$('#matrix').append(element);
+					}
+					$("#matrix").append("<br>");
+				}
+				$("#matrix").append("<button id='build'>Build graph</button>");
+			};
+
+			var readMatrix = function() {
+				var col = parseInt($('#col').val());
+				matrix = []; //clear matrix
+				for (var i=0; i<col; i++) {
+					var inputs = document.getElementsByClassName( "element"+i.toString() ),
+					elements  = [].map.call(inputs, function( input ) {
+					return input.value;
+					}).join( ',' );
+					var dopMatrix = elements.split(",");
+					matrix.push(dopMatrix);
+				}
+			}
+			
+			var drawGraph = function() {
+				$("#parent").remove();
+				$("body").append("<div id='parent'></div>");
+				var col = parseInt($('#col').val());
+				var nodes = new vis.DataSet();
+				for (var i = 0; i < col; i++) {
+					nodes.add({id: i, label: (i+1).toString()});
+				};
+			
+				var edges = new vis.DataSet();
+				for (var i=0; i<col; i++) {
+					for (var j=0; j<col; j++) {
+						if (matrix[i][j] === "1") {
+							edges.add({from: i, to: j, arrows:'to'});
+						}
+					}
+				}
+				// create a network
+				var container = document.getElementById('parent');
+				var data = {
+				nodes: nodes,
+				edges: edges
+				};
+				var options = {};
+				options.nodes = {
+					color: '#ff0'
+				}
+				var network = new vis.Network(container, data, options);
+			};
+		
+			$('#apply').click(function() {
+				var col = parseInt($('#col').val());
+				for (var i=0; i<col; i++) {
+					var dopMatrix = [];
+					for (var j=0; j<col; j++) {
+						dopMatrix.push(0);
+					}
+					matrix.push(dopMatrix);
+				}
+				drawMatrix();
+				$('#apply').remove();
+			});
+			
+			$(document).on("click", "#build", function(){
+				readMatrix();
+				$("body").append("<div id='parent'></div>");
+				drawGraph();
+				$("#task").append("<br/>");
+				$("#task").append("<button id='addNode'>Add node</button>");
+				$("#task").append("<button id='addEdge'>Add edge</button>");
+				$("#task").append("<button id='deleteNode'>Delete node</button>");
+				$("#task").append("<button id='deleteEdge'>Delete edge</button>");
+				$("#task").append("<button id='deleteNodeSave'>Delete node with saving connection</button>");
+				$("#build").remove();
+			});
+			
+			$(document).on("click", "#addNode", function(){
+				var col = parseInt($('#col').val());
+				var dopMatrix = [];
+				for (var i=0; i<col; i++) {
+					dopMatrix.push(0);
+					matrix[i].push(0);
+				}
+				dopMatrix.push(0);
+				matrix.push(dopMatrix);
+				col++;
+				$('#col').val(col);
+				drawMatrix();
+				drawGraph();
+				$("#build").remove();
+			});
+			
+			$(document).on("click", "#addEdge", function(){
+				var i = prompt("Enter a number of node from wich you want to add edge");
+				var j = prompt("Enter a number of node to wich you want to add edge");
+				i--;
+				j--;
+				if (matrix[i][j] != '1') {
+					matrix[i][j] = '1';
+					drawMatrix();
+					drawGraph();
+				}
+				else {
+					alert("This edge is already exist!");
+				}
+				$("#build").remove();
+			});
+		
+			$(document).on("click", "#deleteNode", function(){
+				var col = parseInt($('#col').val());
+				var i = prompt("Enter a number of node which you want to delete");
+				i--;
+				for (var j=0; j<col; j++) {
+					matrix[j].splice(i,1);
+				}
+				matrix.splice(i,1);
+				col--;
+				$('#col').val(col);
+				drawMatrix();
+				drawGraph();
+				$("#build").remove();
+			});
+		
+			$(document).on("click", "#deleteEdge", function(){
+				var i = prompt("Enter a number of node from wich you want to delete edge");
+				var j = prompt("Enter a number of node to wich you want to delete edge");
+				i--;
+				j--;
+				if (matrix[i][j] != '0') {
+					matrix[i][j] = '0';
+					drawMatrix();
+					drawGraph();
+				}
+				else {
+					alert("This edge is don't exist!");
+				}
+				$("#build").remove();
+			});
+			
+			$(document).on("click", "#deleteNodeSave", function(){
+				var col = parseInt($('#col').val());
+				var i = prompt("Enter a number of node which you want to delete");
+				i--;
+				for (var j=0; j<col; j++) {
+					if (matrix[i][j] === '1') {
+						for (var t=0; t<col; t++) {
+							if (matrix[t][i] === '1') {
+								matrix[t][j] = '1';
+							}
+						}
+					}
+				}
+				for (var j=0; j<col; j++) {
+					matrix[j].splice(i,1);
+				}
+				matrix.splice(i,1);
+				col--;
+				$('#col').val(col);
+				drawMatrix();
+				drawGraph();
+				$("#build").remove();
+				console.log(matrix);
+			});
+		});
+	</script>
+  </head>
+  <body>
 	<div id="task">
-		<input id="col"/>
-		<button id="okay">apply</button>
+		<span>Number of nodes: </span>
+		<input type="text" id="col"/>
+		<button id="apply">Apply</button>
 	</div>
-</body>
+  </body>
 </html>
