@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="DataStructureGraph">
     <head>
-        <title>Graph | SA</title>
+        <title>Hierarchical | SA</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="../../../Libraries/bootstrap-3.3.5-dist/css/bootstrap.css">
@@ -10,43 +10,21 @@
         <script type="text/javascript" src="../../../Libraries/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="../../../Libraries/angular.js"></script>
         <script type="text/javascript" src="../../../Libraries/vis/dist/vis.min.js"></script>
-        
+        <script type="text/javascript" src="../../../Libraries/vis/examples/network/exampleUtil.js"></script>
     </head>
     <body ng-controller="DefaultCtrl">
         <div class="container">
-            <h1 class="text-center">Graph</h1>
+            <h1 class="text-center">Hierarchy</h1>
                  
             <div class="col-lg-12">
-                <button type="button" class="btn btn-primary" ng-click="AddNode()">Add Node</button> 
-                <button type="button" class="btn btn-primary" ng-click="AddEdge()">Add Edge</button> 
-                <button type="button" class="btn btn-warning" ng-click="DeleteEdge()">Delete edge</button> 
-                <button type="button" class="btn btn-warning" ng-click="DeleteNode()">Delete node and edges </button> 
-                <button type="button" class="btn btn-warning" ng-click="DeleteNodeButSaveConnections()">Delete node but save connections </button>
+                <form class="form-inline">
+                    <input type="text" class="form-control" id="nodesCount" placeholder="Number of nodes">
+                    <button type="button" class="btn btn-primary" ng-click="Draw()">Create</button> 
+                </form>
             </div>
             <br><br>
-            <!-- MATRIX -->
-            <div class="col-lg-4">
-                <div class="table-responsive">
-                    <table class="matrix">
-                        <thead >
-                            <th class="active" >i\j</th>
-                            <th class="active" ng-repeat="item in matrix track by $index">{{$index + 1}}</th>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="array in matrix track by $index" >
-                                <td class="active"><b>{{$index + 1}}</b></td>
-                                <td ng-repeat="item in array track by $index">{{item}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-              <!-- GRAPH -->
-            <div class="col-lg-8">
-                <div id="myMatrix"></div>    
-            </div>            
+            <div id="myMatrix"></div>                
         </div>
-        
         <script src="script.js"></script>
     </body>
 </html>
